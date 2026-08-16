@@ -122,6 +122,7 @@ published — including the ones that contradict the mock.
 
 | Repo | What it is | Stack |
 |---|---|---|
+| **[pandu](https://github.com/ridwanspace/pandu)** | Self-hostable RAG platform with the production scaffolding demos skip: hybrid pgvector+FTS retrieval with RRF, a vendor-independent LLM seam (fallback chain, per-call cost metering), streaming chat with per-claim citations, and CI-gated evals measured on a NIST corpus (recall@5 0.967, judge faithfulness 0.852) | FastAPI · Next.js · pgvector · Gemini · DeepSeek |
 | **[notula](https://github.com/ridwanspace/notula)** | Full-stack meeting-notes pipeline that measures itself: audio → diarized transcript (the system of record) → re-runnable summaries, with per-stage token/cost metering, a schema-repair loop, judge-scored evals, and CI-enforced layer contracts | FastAPI · Next.js · Gemini · DeepSeek · SQLite |
 | **[llm-eval-harness](https://github.com/ridwanspace/llm-eval-harness)** | Golden-dataset evals with LLM-as-judge, and case-by-case prompt-regression diffing that gates CI — because aggregate scores hide the fix that broke two other answers | Python · Pydantic · OpenTelemetry |
 | **[llm-cost-gateway](https://github.com/ridwanspace/llm-cost-gateway)** | OpenAI-compatible gateway: tiered routing by task complexity, provider fallback with circuit breaking, prompt caching, hard per-tenant token budgets | FastAPI · Redis · Prometheus · OTel |
