@@ -112,7 +112,21 @@ audit tools, prompt caching, SSE streaming, per-tenant token metering with hard 
 agent-loop request limits. Self-improving CSV ingestion — LLM header-mapping promoted to
 deterministic per-tenant adapters after confirmation.
 
-## Open source & demos
+## LLM engineering tools
+
+The parts of production LLM work that are hard to show from a private repo — evaluation,
+defense measurement, cost governance, retrieval quality, and tool governance. Each one runs
+offline against a deterministic mock provider, so `git clone && make demo` needs no API key.
+
+| Repo | What it is | Stack |
+|---|---|---|
+| **[llm-eval-harness](https://github.com/ridwanspace/llm-eval-harness)** | Golden-dataset evals with LLM-as-judge, and case-by-case prompt-regression diffing that gates CI — because aggregate scores hide the fix that broke two other answers | Python · Pydantic · OpenTelemetry |
+| **[llm-cost-gateway](https://github.com/ridwanspace/llm-cost-gateway)** | OpenAI-compatible gateway: tiered routing by task complexity, provider fallback with circuit breaking, prompt caching, hard per-tenant token budgets | FastAPI · Redis · Prometheus · OTel |
+| **[hybrid-rag-reference](https://github.com/ridwanspace/hybrid-rag-reference)** | BM25 + dense retrieval, reciprocal rank fusion, cross-encoder reranking — with an IR benchmark (recall@k, nDCG, MRR) that measures whether each stage actually helps | Python · pgvector · numpy |
+| **[prompt-injection-bench](https://github.com/ridwanspace/prompt-injection-bench)** | Measures attack-success-rate per defense stack over a 127-attack corpus, so defenses get chosen on evidence. For authorized testing of your own applications | Python · Pydantic |
+| **[mcp-guarded-tools](https://github.com/ridwanspace/mcp-guarded-tools)** | MCP server treating a large tool surface as a governance problem: tool-search discovery, budgets, human-in-the-loop confirmation for writes, append-only audit log | TypeScript · MCP SDK · Zod |
+
+## Other open source & demos
 
 | Repo | What it is | Stack |
 |---|---|---|
