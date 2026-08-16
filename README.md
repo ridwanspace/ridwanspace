@@ -116,7 +116,9 @@ deterministic per-tenant adapters after confirmation.
 
 The parts of production LLM work that are hard to show from a private repo — evaluation,
 defense measurement, cost governance, retrieval quality, and tool governance. Each one runs
-offline against a deterministic mock provider, so `git clone && make demo` needs no API key.
+offline against a deterministic mock provider, so `git clone && make demo` needs no API key,
+and each is also verified against live models (DeepSeek, Gemini) with the measured results
+published — including the ones that contradict the mock.
 
 | Repo | What it is | Stack |
 |---|---|---|
