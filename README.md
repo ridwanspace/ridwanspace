@@ -116,14 +116,15 @@ deterministic per-tenant adapters after confirmation.
 
 The parts of production LLM work that are hard to show from a private repo — evaluation,
 defense measurement, cost governance, retrieval quality, and tool governance. Each one runs
-offline against a deterministic mock provider, so `git clone && make demo` needs no API key,
-and each is also verified against live models (DeepSeek, Gemini) with the measured results
-published — including the ones that contradict the mock.
+offline against a deterministic mock provider, so `git clone && make demo` needs no API key;
+where a repo calls models at all, it is also verified against live ones (DeepSeek, Gemini)
+with the measured results published — including the ones that contradict the mock.
 
 | Repo | What it is | Stack |
 |---|---|---|
 | **[pandu](https://github.com/ridwanspace/pandu)** | Self-hostable RAG platform with the production scaffolding demos skip: hybrid pgvector+FTS retrieval with RRF, a vendor-independent LLM seam (fallback chain, per-call cost metering), streaming chat with per-claim citations, and CI-gated evals measured on a NIST corpus (recall@5 0.967, judge faithfulness 0.852) | FastAPI · Next.js · pgvector · Gemini · DeepSeek |
 | **[notula](https://github.com/ridwanspace/notula)** | Full-stack meeting-notes pipeline that measures itself: audio → diarized transcript (the system of record) → re-runnable summaries, with per-stage token/cost metering, a schema-repair loop, judge-scored evals, and CI-enforced layer contracts | FastAPI · Next.js · Gemini · DeepSeek · SQLite |
+| **[llm-flightdeck](https://github.com/ridwanspace/llm-flightdeck)** | Mission-control dashboard over three of the repos below — cost/budget burn-down, case-level eval regression diffs, circuit-breaker health, injection ASR by defense preset — every number recomputed from bundled real-run artifacts and unit-tested against them, offline with zero keys | Next.js · TypeScript · Recharts · Zod |
 | **[llm-eval-harness](https://github.com/ridwanspace/llm-eval-harness)** | Golden-dataset evals with LLM-as-judge, and case-by-case prompt-regression diffing that gates CI — because aggregate scores hide the fix that broke two other answers | Python · Pydantic · OpenTelemetry |
 | **[llm-cost-gateway](https://github.com/ridwanspace/llm-cost-gateway)** | OpenAI-compatible gateway: tiered routing by task complexity, provider fallback with circuit breaking, prompt caching, hard per-tenant token budgets | FastAPI · Redis · Prometheus · OTel |
 | **[hybrid-rag-reference](https://github.com/ridwanspace/hybrid-rag-reference)** | BM25 + dense retrieval, reciprocal rank fusion, cross-encoder reranking — with an IR benchmark (recall@k, nDCG, MRR) that measures whether each stage actually helps | Python · pgvector · numpy |
